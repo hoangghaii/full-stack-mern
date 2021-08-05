@@ -7,7 +7,6 @@ exports.getUser = async (req, res) => {
 			return res.status(400).json({ success: false, message: "User not found" });
 		res.status(200).json({ success: true, user });
 	} catch (error) {
-		console.log(error);
 		res.status(500).json({ success: false, message: "Internal server error" });
 	}
 };
@@ -34,7 +33,6 @@ exports.register = async (req, res) => {
 			accessToken: response.accessToken,
 		});
 	} catch (error) {
-		console.log(error);
 		res.status(500).json({ success: false, message: "Internal server error" });
 	}
 };
@@ -61,7 +59,6 @@ exports.login = async (req, res) => {
 			accessToken: response.accessToken,
 		});
 	} catch (error) {
-		console.log(error);
 		res.status(500).json({ success: false, message: "Internal server error" });
 	}
 };

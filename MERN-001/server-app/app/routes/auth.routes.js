@@ -1,5 +1,5 @@
 const controller = require("../controllers/auth.controllers");
-const { verifyToken } = require("../middlewares/auth.middlewares");
+const verifyToken = require("../middlewares/auth.middlewares");
 
 module.exports = function (app) {
 	// @route GET api/auth

@@ -7,7 +7,7 @@ exports.getUser = async (userId) => {
 		const user = Users.findById(userId).select("-password");
 		return user;
 	} catch (error) {
-		return error;
+		throw error;
 	}
 };
 
@@ -35,7 +35,7 @@ exports.register = async (username, password) => {
 			accessToken,
 		};
 	} catch (error) {
-		return error;
+		throw error;
 	}
 };
 
@@ -71,6 +71,6 @@ exports.login = async (username, password) => {
 			accessToken,
 		};
 	} catch (error) {
-		return error;
+		throw error;
 	}
 };
