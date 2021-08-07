@@ -10,6 +10,7 @@ const app = express();
 const corsOptions = { origin: "*", optionsSuccessStatus: 200 };
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //Connect to mongooseDB
 const connectDB = async () => {

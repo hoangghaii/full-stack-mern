@@ -1,16 +1,6 @@
 import { AxiosResponse } from "axios";
+import { AuthResponseType, UserType } from "features/common/types";
 import axiosClient from "./axiosClient";
-
-type UserType = {
-	username: string;
-	password: string;
-};
-
-type AuthResponseType = {
-	success: boolean;
-	message: string;
-	accessToken: string;
-};
 
 export const authApi = {
 	async login(userData: UserType) {
@@ -21,7 +11,7 @@ export const authApi = {
 				url,
 				userData
 			);
-			return respon;
+			return respon.data;
 		} catch (error) {
 			return error;
 		}
