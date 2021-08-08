@@ -34,4 +34,15 @@ export const authApi = {
 			return error;
 		}
 	},
+
+	async checkUser() {
+		const url = "/auth";
+
+		try {
+			const respon: AxiosResponse = await axiosClient.get(url);
+			return respon.data;
+		} catch (error) {
+			return error;
+		}
+	},
 };

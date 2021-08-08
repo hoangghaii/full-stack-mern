@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { RecoilRoot } from "recoil";
 import { Auth } from "views/Auth";
+import { Dashboard } from "views/Dashboard";
 import "./App.css";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
 						path="/register"
 						render={(props) => <Auth {...props} authPath="register" />}
 					/>
+					<Route exact path="/dashboard" component={Dashboard} />
 				</Switch>
 			</Router>
 			<ToastContainer
