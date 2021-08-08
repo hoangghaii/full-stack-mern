@@ -1,15 +1,15 @@
 import { authTokenState, useToastMessage } from "features";
-import { UserType } from "features/common/types";
+import { RegisterType } from "features/common/types";
 import { useSetRecoilState } from "recoil";
 import { authApi } from "servers";
 
-export const useLogin = () => {
+export const useRegister = () => {
 	const setAccessToken = useSetRecoilState(authTokenState);
 	const showToastbar = useToastMessage();
 
-	const onLogin = async (userData: UserType): Promise<any> => {
+	const onRegister = async (userData: RegisterType): Promise<any> => {
 		try {
-			const response = await authApi.login(userData);
+			const response = await authApi.register(userData);
 			if (response.success) {
 				setAccessToken(response.accessToken);
 				showToastbar(response.message, "success");
@@ -20,5 +20,5 @@ export const useLogin = () => {
 		}
 	};
 
-	return onLogin;
+	return onRegister;
 };

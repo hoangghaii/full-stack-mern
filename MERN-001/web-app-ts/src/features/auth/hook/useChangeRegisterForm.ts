@@ -1,13 +1,17 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { UserType } from "features/common/types";
+import { RegisterType } from "features/common/types";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
-export const useChangeLoginForm = () => {
+export const useChangeRegisterForm = () => {
 	const schema = yup.object().shape({
 		username: yup.string().required("Please enter username"),
 		password: yup.string().required("Please enter password"),
+		confirmPassword: yup
+			.string()
+			.required("Please enter confirm password")
+			.oneOf([yup.ref("password"), null], "Confirm Password does not match"),
 	});
 
 	const [submit, setSubmit] = useState<boolean>(false);
@@ -16,11 +20,12 @@ export const useChangeLoginForm = () => {
 		register,
 		handleSubmit,
 		formState: { errors, isSubmitting },
-	} = useForm<UserType>({
+	} = useForm<RegisterType>({
 		reValidateMode: "onChange",
 		defaultValues: {
 			username: "",
 			password: "",
+			confirmPassword: "",
 		},
 		resolver: yupResolver(schema),
 	});

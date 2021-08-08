@@ -1,5 +1,9 @@
 import { AxiosResponse } from "axios";
-import { AuthResponseType, UserType } from "features/common/types";
+import {
+	AuthResponseType,
+	RegisterType,
+	UserType,
+} from "features/common/types";
 import axiosClient from "./axiosClient";
 
 export const authApi = {
@@ -17,7 +21,7 @@ export const authApi = {
 		}
 	},
 
-	async register(userData: UserType) {
+	async register(userData: RegisterType) {
 		const url = "/auth/register";
 
 		try {
