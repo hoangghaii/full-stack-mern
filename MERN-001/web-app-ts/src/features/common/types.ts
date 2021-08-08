@@ -11,3 +11,5 @@ export type AuthResponseType = {
 	message: string;
 	accessToken: string;
 };
+
+export type MessageType = "success" | "info" | "warn" | "error";

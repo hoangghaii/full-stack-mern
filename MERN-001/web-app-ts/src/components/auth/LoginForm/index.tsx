@@ -1,16 +1,15 @@
-import { authState, useChangeLoginForm } from "features";
+import { useAuthToken, useChangeLoginForm } from "features";
 import { useLogin } from "features/auth/hook/useLogin";
 import { FC, Fragment } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 
 type PropTypes = {};
 
 export const LoginForm: FC = (props: PropTypes) => {
 	const { onChangeLoginForm, loginForm } = useChangeLoginForm();
-	const { onLogin } = useLogin();
-	const authToken = useRecoilValue(authState);
+	const onLogin = useLogin();
+	const authToken = useAuthToken();
 	console.log(authToken);
 
 	return (

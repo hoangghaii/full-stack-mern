@@ -1,5 +1,6 @@
 import { Landing } from "components/layout/Landing";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { RecoilRoot } from "recoil";
 import { Auth } from "views/Auth";
 import "./App.css";
@@ -22,6 +23,18 @@ function App() {
 					/>
 				</Switch>
 			</Router>
+			<ToastContainer
+				position="bottom-right"
+				autoClose={5000}
+				hideProgressBar
+				newestOnTop
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				draggablePercent={60}
+				pauseOnHover
+			/>
 		</RecoilRoot>
 	);
 }

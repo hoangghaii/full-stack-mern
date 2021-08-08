@@ -1,7 +1,10 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-	baseURL: process.env.REACT_APP_BASE_URL,
+	baseURL:
+		process.env.NODE_ENV !== "production"
+			? process.env.REACT_APP_BASE_URL
+			: "somedeployurl",
 	headers: {
 		"Content-Type": "application/json",
 	},
@@ -29,7 +32,9 @@ axiosClient.interceptors.response.use(
 	function (error) {
 		// Any status codes that falls outside the range of 2xx cause this function to trigger
 		// Do something with response error
-		return Promise.reject(error);
+		if (error.response) {
+			return error.response;
+		}
 	}
 );
 
