@@ -1,3 +1,4 @@
+import { ProtectedRoute } from "components/common/ProtectedRoute";
 import { Landing } from "components/layout/Landing";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -22,7 +23,12 @@ function App() {
 						path="/register"
 						render={(props) => <Auth {...props} authPath="register" />}
 					/>
-					<Route exact path="/dashboard" component={Dashboard} />
+					<ProtectedRoute
+						exact
+						path="/dashboard"
+						component={Dashboard}
+						authenticationPath="/login"
+					/>
 				</Switch>
 			</Router>
 			<ToastContainer
