@@ -27,15 +27,12 @@ function App() {
 			</Router>
 			<ToastContainer
 				position="bottom-right"
-				autoClose={5000}
+				autoClose={3000}
 				hideProgressBar
 				newestOnTop
-				closeOnClick
 				rtl={false}
-				pauseOnFocusLoss
-				draggable
+				pauseOnFocusLoss={false}
 				draggablePercent={60}
-				pauseOnHover
 			/>
 		</RecoilRoot>
 	);

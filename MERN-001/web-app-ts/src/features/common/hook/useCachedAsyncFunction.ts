@@ -12,9 +12,9 @@ export const useCachedAsyncFunction = <T>(
 	errorHandler: ErrorHandlerType,
 	dedupingInterval?: number
 ) => {
-	const { data } = useSWR(param, asyncFunction, {
+	const { data, mutate } = useSWR(param, asyncFunction, {
 		dedupingInterval: dedupingInterval ?? queryDedupingInterval,
-		onErrorRetry: (err, _key, _config, revalidate, { retryCount }) => {
+		onErrorRetry: (err: Error, _key, _config, revalidate, { retryCount }) => {
 			const count = retryCount ?? 0; // avoid re-fetch for 5 minutes
 			if (count >= queryRetryCount) {
 				// if still error after retry, set error
@@ -24,5 +24,5 @@ export const useCachedAsyncFunction = <T>(
 			setTimeout(() => revalidate({ retryCount: count }), queryRetryInterval);
 		},
 	});
-	return data as T;
+	return { data, mutate };
 };

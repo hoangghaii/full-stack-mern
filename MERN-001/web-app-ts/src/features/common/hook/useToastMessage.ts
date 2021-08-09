@@ -2,7 +2,10 @@ import { toast } from "react-toastify";
 import { MessageType } from "../types";
 
 export const useToastMessage = () => {
-	const showToastbar = (message: string | JSX.Element, type: MessageType) => {
+	const showToastbar = (
+		message: string | JSX.Element | Error,
+		type: MessageType
+	) => {
 		switch (type) {
 			case "success":
 				return toast.success(`✔️ ${message}`);
