@@ -1,16 +1,16 @@
 import { atom } from "recoil";
 
 type AuthType = {
-	authLoading?: boolean;
-	isAuthenticated?: boolean;
-	user?: object | null;
+  authLoading?: boolean;
+  isAuthenticated?: boolean;
+  user?: string;
 };
 
 export const authState = atom<AuthType | undefined>({
-	key: "authState",
-	default: {
-		authLoading: true,
-		isAuthenticated: false,
-		user: null,
-	},
+  key: "authState",
+  default: {
+    authLoading: true,
+    isAuthenticated: false,
+    user: "",
+  },
 });

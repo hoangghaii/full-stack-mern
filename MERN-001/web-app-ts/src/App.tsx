@@ -8,40 +8,39 @@ import { Dashboard } from "views/Dashboard";
 import "./App.css";
 
 function App() {
-	return (
-		<RecoilRoot>
-			<Router>
-				<Switch>
-					<Route exact path="/" component={Landing} />
-					<Route
-						exact
-						path="/login"
-						render={(props) => <Auth {...props} authPath="login" />}
-					/>
-					<Route
-						exact
-						path="/register"
-						render={(props) => <Auth {...props} authPath="register" />}
-					/>
-					<ProtectedRoute
-						exact
-						path="/dashboard"
-						component={Dashboard}
-						authenticationPath="/login"
-					/>
-				</Switch>
-			</Router>
-			<ToastContainer
-				position="bottom-right"
-				autoClose={3000}
-				hideProgressBar
-				newestOnTop
-				rtl={false}
-				pauseOnFocusLoss={false}
-				draggablePercent={60}
-			/>
-		</RecoilRoot>
-	);
+  return (
+    <RecoilRoot>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route
+            exact
+            path="/login"
+            render={(props) => <Auth {...props} authPath="login" />}
+          />
+          <Route
+            exact
+            path="/register"
+            render={(props) => <Auth {...props} authPath="register" />}
+          />
+          <ProtectedRoute
+            exact
+            path="/dashboard"
+            render={(props) => <Dashboard {...props} />}
+          />
+        </Switch>
+      </Router>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggablePercent={60}
+      />
+    </RecoilRoot>
+  );
 }
 
 export default App;
