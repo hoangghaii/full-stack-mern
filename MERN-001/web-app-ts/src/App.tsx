@@ -3,6 +3,7 @@ import { Landing } from "components/layout/Landing";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { RecoilRoot } from "recoil";
+import { About } from "views/About";
 import { Auth } from "views/Auth";
 import { Dashboard } from "views/Dashboard";
 import "./App.css";
@@ -27,6 +28,11 @@ function App() {
             exact
             path="/dashboard"
             render={(props) => <Dashboard {...props} />}
+          />
+          <ProtectedRoute
+            exact
+            path="/about"
+            render={(props) => <About {...props} />}
           />
         </Switch>
       </Router>

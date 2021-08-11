@@ -25,26 +25,22 @@ export const useCheckAuth = () => {
   );
 
   useEffect(() => {
-    if (data) {
-      if (data.success) {
-        setAuthInfo({
-          authLoading: false,
-          isAuthenticated: true,
-          user: data.user.username,
-        });
-      } else {
-        setAuthInfo({
-          authLoading: false,
-          isAuthenticated: false,
-          user: "",
-        });
-      }
+    if (data && data.success) {
+      setAuthInfo({
+        isAuthenticated: true,
+        user: data.user.username,
+      });
+    } else {
+      setAuthInfo({
+        isAuthenticated: false,
+        user: "",
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  const onCheckAuth = () => {
-    setHeaderToken(localStorage[LOCAL_STORAGE_TOKEN_NAME]);
+  const onCheckAuth = (token: string | undefined) => {
+    setHeaderToken(token);
     mutate();
   };
 

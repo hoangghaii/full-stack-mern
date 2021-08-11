@@ -46,7 +46,6 @@ exports.updatePost = async (req, res) => {
 			url,
 			status
 		);
-		console.log(updatedPost);
 		if (!updatedPost)
 			return res
 				.status(401)

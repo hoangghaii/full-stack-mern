@@ -1,6 +1,12 @@
 import IconAdd from "assets/plus-circle-fill.svg";
+import { AddPostModal } from "components/posts/AddPostModal";
 import { SinglePost } from "components/posts/SinglePost";
-import { PostType, useCheckAuth, useGetPostsList } from "features";
+import {
+  PostType,
+  useCheckAuth,
+  useCreatePost,
+  useGetPostsList,
+} from "features";
 import { FC } from "react";
 import {
   Button,
@@ -20,6 +26,7 @@ export const Dashboard: FC<PropTypes & RouteComponentProps> = (
 ) => {
   const { authInfo } = useCheckAuth();
   const { postsList } = useGetPostsList();
+  const { setShowPostModal } = useCreatePost();
 
   let body;
 
@@ -30,7 +37,7 @@ export const Dashboard: FC<PropTypes & RouteComponentProps> = (
       </div>
     );
   if (authInfo && postsList) {
-    if (postsList.post.length === 0)
+    if (postsList.post && postsList.post.length === 0)
       body = (
         <Card className="text-center mx-5 my-5">
           <Card.Header as="h1">Hi {authInfo.user}</Card.Header>
@@ -39,10 +46,7 @@ export const Dashboard: FC<PropTypes & RouteComponentProps> = (
             <Card.Text>
               Click the button below to track your first skill to learn
             </Card.Text>
-            <Button
-              variant="primary"
-              // onClick={setShowAddPostModal.bind(this, true)}
-            >
+            <Button variant="primary" onClick={() => setShowPostModal(true)}>
               LearnIt!
             </Button>
           </Card.Body>
@@ -67,7 +71,7 @@ export const Dashboard: FC<PropTypes & RouteComponentProps> = (
           >
             <Button
               className="btn-floating"
-              // onClick={setShowAddPostModal.bind(this, true)}
+              onClick={() => setShowPostModal(true)}
             >
               <img src={IconAdd} alt="add-post" width="60" height="60" />
             </Button>
@@ -76,5 +80,10 @@ export const Dashboard: FC<PropTypes & RouteComponentProps> = (
       );
     }
   }
-  return <div>{body}</div>;
+  return (
+    <>
+      {body}
+      <AddPostModal />
+    </>
+  );
 };

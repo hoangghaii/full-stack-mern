@@ -16,13 +16,14 @@ export const Auth: FC<PropTypes & RouteComponentProps> = (props: PropTypes) => {
 
   let body;
 
-  if (authInfo?.authLoading) {
+  if (!authInfo) {
     body = (
       <div className="d-flex justify-content-center mt-2">
         <Spinner animation="border" variant="info" />
       </div>
     );
-  } else if (authInfo?.isAuthenticated) return <Redirect to="/dashboard" />;
+  }
+  if (authInfo.isAuthenticated) return <Redirect to="/dashboard" />;
   else
     body = (
       <>

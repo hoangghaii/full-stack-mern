@@ -26,8 +26,18 @@ export type PostType = {
   description: string;
   url: string;
   status: string;
-  user: {
-    _id: string;
-    username: string;
-  };
+};
+
+export type CreatePostType = {
+  title: string;
+  description?: string;
+  url?: string;
+};
+
+export type UpdatePostType = {
+  _id: string;
+  title: string;
+  description?: string;
+  url?: string;
+  status?: string;
 };
