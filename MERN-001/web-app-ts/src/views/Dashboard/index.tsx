@@ -1,12 +1,8 @@
 import IconAdd from "assets/plus-circle-fill.svg";
 import { AddPostModal } from "components/posts/AddPostModal";
 import { SinglePost } from "components/posts/SinglePost";
-import {
-  PostType,
-  useCheckAuth,
-  useCreatePost,
-  useGetPostsList,
-} from "features";
+import { UpdatePostModal } from "components/posts/UpdatePostModal";
+import { PostType, useCheckAuth, useCreatePost, usePostsList } from "features";
 import { FC } from "react";
 import {
   Button,
@@ -25,7 +21,7 @@ export const Dashboard: FC<PropTypes & RouteComponentProps> = (
   props: PropTypes
 ) => {
   const { authInfo } = useCheckAuth();
-  const { postsList } = useGetPostsList();
+  const { postsList } = usePostsList();
   const { setShowPostModal } = useCreatePost();
 
   let body;
@@ -84,6 +80,8 @@ export const Dashboard: FC<PropTypes & RouteComponentProps> = (
     <>
       {body}
       <AddPostModal />
+      <UpdatePostModal />
+      {/* {post !== null && <UpdatePostModal />} */}
     </>
   );
 };

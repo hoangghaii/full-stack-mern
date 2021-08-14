@@ -1,6 +1,7 @@
 const {
 	createPost,
 	getPosts,
+	getDetailPost,
 	updatePost,
 	deletePost,
 } = require("../services/posts.services");
@@ -9,6 +10,23 @@ exports.getPosts = async (req, res) => {
 	try {
 		const posts = await getPosts(req.userId);
 		res.status(200).json({ success: true, post: posts });
+	} catch (error) {
+		res.status(500).json({ success: false, message: "Internal server error" });
+	}
+};
+
+exports.getDetailPost = async (req, res) => {
+	const id = req.params.id;
+
+	try {
+		const detailPost = await getDetailPost(id, req.userId);
+
+		if (!detailPost)
+			return res
+				.status(401)
+				.json({ success: false, message: "Post not found or user not authorised" });
+
+		res.status(200).json({ success: true, post: detailPost });
 	} catch (error) {
 		res.status(500).json({ success: false, message: "Internal server error" });
 	}

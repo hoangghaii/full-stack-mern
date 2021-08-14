@@ -9,6 +9,16 @@ const getPosts = async (id) => {
 	}
 };
 
+const getDetailPost = async (id, userId) => {
+	try {
+		const post = await Posts.findById(id).populate("user", ["username"]);
+
+		return post;
+	} catch (error) {
+		throw error;
+	}
+};
+
 const createPost = async (userId, title, description, url, status) => {
 	try {
 		const newPost = new Posts({
@@ -62,4 +72,10 @@ const deletePost = async (id, userId) => {
 	}
 };
 
-module.exports = { createPost, getPosts, updatePost, deletePost };
+module.exports = {
+	createPost,
+	getPosts,
+	getDetailPost,
+	updatePost,
+	deletePost,
+};

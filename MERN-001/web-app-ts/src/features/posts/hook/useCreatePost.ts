@@ -1,8 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   CreatePostType,
-  postModalState,
-  useGetPostsList,
+  createPostModalState,
+  usePostsList,
   useToastMessage,
 } from "features";
 import { useState } from "react";
@@ -13,7 +13,7 @@ import * as yup from "yup";
 
 export const useCreatePost = () => {
   const showToastbar = useToastMessage();
-  const { getPostsList } = useGetPostsList();
+  const { getPostsList } = usePostsList();
 
   const schema = yup.object().shape({
     title: yup.string().required("Please enter post title"),
@@ -26,8 +26,8 @@ export const useCreatePost = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
     reset,
+    formState: { errors, isSubmitting },
   } = useForm<CreatePostType>({
     reValidateMode: "onChange",
     defaultValues: {
@@ -52,18 +52,19 @@ export const useCreatePost = () => {
     }
   };
 
-  const [showPostModal, setShowPostModal] = useRecoilState(postModalState);
+  const [showPostModal, setShowPostModal] =
+    useRecoilState(createPostModalState);
 
   return {
-    handleSubmit,
     errors,
     isSubmitting,
+    submit,
+    showPostModal,
+    handleSubmit,
     register,
     reset,
-    submit,
     setSubmit,
     onCreate,
-    showPostModal,
     setShowPostModal,
   };
 };

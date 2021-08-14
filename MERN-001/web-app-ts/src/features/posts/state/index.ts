@@ -1,1 +1,2 @@
-export * from "./postModalState";
+export * from "./createPostModalState";
+export * from "./updatePostModalState";

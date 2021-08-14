@@ -2,7 +2,7 @@ import { useCachedAsyncFunction, useToastMessage } from "features";
 import { useState } from "react";
 import { postsApis } from "servers";
 
-export const useGetPostsList = () => {
+export const usePostsList = () => {
   const showToastbar = useToastMessage();
 
   const [error, setError] = useState<Error | undefined>(undefined);

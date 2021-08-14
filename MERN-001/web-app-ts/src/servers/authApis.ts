@@ -1,9 +1,5 @@
 import { AxiosResponse } from "axios";
-import {
-  AuthResponseType,
-  RegisterType,
-  UserType,
-} from "features/common/types";
+import { AuthResponseType, RegisterType, UserType } from "features";
 import axiosClient from "./axiosClient";
 
 export const authApi = {
