@@ -1,24 +1,24 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
-  createPostModalState,
   CreatePostType,
+  PostType,
   updatePostIdState,
   updatePostModalState,
   usePostsList,
   useToastMessage,
-  PostType,
 } from "features";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { useRecoilState } from "recoil";
 import { postsApis } from "servers";
-import { useRecoilState, useRecoilValue } from "recoil";
+import * as yup from "yup";
 
 export const useUpdatePost = () => {
   const showToastbar = useToastMessage();
   const { getPostsList } = usePostsList();
-  const id = useRecoilValue(updatePostIdState);
-  const showPostModal = useRecoilValue(updatePostModalState);
+  const [idPostUpdate, setIdPostUpdate] = useRecoilState(updatePostIdState);
+  const [showPostModal, setShowPostModal] =
+    useRecoilState(updatePostModalState);
   const [postDetail, setPostDetail] = useState<PostType>();
 
   const schema = yup.object().shape({
@@ -27,20 +27,6 @@ export const useUpdatePost = () => {
     url: yup.string(),
     status: yup.string(),
   });
-
-  const onPostDetail = async (id: string) => {
-    try {
-      const response = await postsApis.getDetail(id);
-      setPostDetail(response.post);
-    } catch (error: any) {
-      showToastbar(error, "error");
-    }
-  };
-
-  useEffect(() => {
-    onPostDetail(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id && showPostModal]);
 
   const [submit, setSubmit] = useState<boolean>(false);
 
@@ -60,12 +46,33 @@ export const useUpdatePost = () => {
     resolver: yupResolver(schema),
   });
 
-  const onUpdate = async (data: CreatePostType) => {
+  const onPostDetail = async (id: string) => {
     try {
-      const response = await postsApis.updatePost(id, data);
-      console.log(response);
+      const response = await postsApis.getDetail(id);
+      setPostDetail(response.post);
+      reset(response.post);
     } catch (error: any) {
       showToastbar(error, "error");
+    }
+  };
+
+  useEffect(() => {
+    onPostDetail(idPostUpdate);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idPostUpdate && showPostModal]);
+
+  const onUpdate = async (data: CreatePostType) => {
+    try {
+      const response = await postsApis.updatePost(idPostUpdate, data);
+      if (response) {
+        if (response.success) {
+          getPostsList();
+          showToastbar(response.message, "success");
+        } else showToastbar(response.message, "error");
+        setShowPostModal(false);
+      }
+    } catch (error: any) {
+      showToastbar("Internal server error", "error");
     }
   };
 
@@ -79,6 +86,7 @@ export const useUpdatePost = () => {
     reset,
     setSubmit,
     onUpdate,
-    // setShowPostModal,
+    setIdPostUpdate,
+    setShowPostModal,
   };
 };

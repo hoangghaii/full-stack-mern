@@ -13,7 +13,7 @@ export const usePostsList = () => {
     setError
   );
 
-  if (error) showToastbar(error, "error");
+  if (error) showToastbar("Internal server error", "error");
 
   return { postsList: data, getPostsList: mutate };
 };

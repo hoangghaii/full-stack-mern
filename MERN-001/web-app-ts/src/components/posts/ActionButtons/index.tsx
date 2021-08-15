@@ -1,14 +1,9 @@
 import IconEdit from "assets/pencil.svg";
 import IconPlay from "assets/play-btn.svg";
 import IconDelete from "assets/trash.svg";
-import {
-  updatePostIdState,
-  updatePostModalState,
-  useDeletePost,
-} from "features";
+import { useDeletePost, useUpdatePost } from "features";
 import { FC } from "react";
 import { Button } from "react-bootstrap";
-import { useRecoilValue, useSetRecoilState } from "recoil";
 
 type PropsType = {
   url: string;
@@ -17,8 +12,7 @@ type PropsType = {
 
 export const ActionButtons: FC<PropsType> = (props: PropsType) => {
   const onDelete = useDeletePost();
-  const setShowPostModal = useSetRecoilState(updatePostModalState);
-  const setIdPostUpdate = useSetRecoilState(updatePostIdState);
+  const { setIdPostUpdate, setShowPostModal } = useUpdatePost();
 
   return (
     <>

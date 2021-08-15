@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
-  CreatePostType,
   createPostModalState,
+  CreatePostType,
   usePostsList,
   useToastMessage,
 } from "features";
@@ -42,13 +42,14 @@ export const useCreatePost = () => {
     try {
       const response = await postsApis.createPost(data);
       if (response) {
-        if (response.success) showToastbar(response.message, "success");
-        else showToastbar(response.message, "error");
+        if (response.success) {
+          getPostsList();
+          showToastbar(response.message, "success");
+        } else showToastbar(response.message, "error");
         setShowPostModal(false);
-        getPostsList();
       }
     } catch (error: any) {
-      showToastbar(error, "error");
+      showToastbar("Internal server error", "error");
     }
   };
 

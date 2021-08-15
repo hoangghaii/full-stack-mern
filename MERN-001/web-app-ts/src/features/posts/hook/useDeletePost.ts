@@ -16,7 +16,7 @@ export const useDeletePost = () => {
         } else showToastbar(response.message, "error");
       }
     } catch (error: any) {
-      showToastbar(error, "error");
+      showToastbar("Internal server error", "error");
     }
   };
 

@@ -40,7 +40,7 @@ export const postsApis = {
     const url = `/posts/${id}`;
 
     try {
-      const response: AxiosResponse = await axiosClient.post(url, data);
+      const response: AxiosResponse = await axiosClient.put(url, data);
       return response.data;
     } catch (error) {
       return error;
