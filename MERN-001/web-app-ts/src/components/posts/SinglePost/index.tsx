@@ -12,7 +12,8 @@ export const SinglePost: FC<PropTypes> = (props: PropTypes) => {
 
   return (
     <Card
-      className="shadow"
+      className="shadow h-100"
+      style={{ borderRadius: ".5rem", padding: ".5rem 1rem" }}
       border={
         status === "LEARNED"
           ? "success"
@@ -21,12 +22,16 @@ export const SinglePost: FC<PropTypes> = (props: PropTypes) => {
           : "danger"
       }
     >
-      <Card.Body>
+      <Card.Body className="py-2 px-3">
         <Card.Title>
-          <Row>
-            <Col>
-              <p className="post-title">{title}</p>
+          <Row className="flex-column">
+            <Col className="p-0 d-flex flex-column">
+              <h3 className="d-inline-block text-truncate m-100 post-title">
+                {title}
+              </h3>
               <Badge
+                className="mb-3 text-left"
+                style={{ width: "fit-content" }}
                 pill
                 variant={
                   status === "LEARNED"
@@ -39,12 +44,12 @@ export const SinglePost: FC<PropTypes> = (props: PropTypes) => {
                 {status}
               </Badge>
             </Col>
-            <Col className="text-right">
+            <Col className="text-right p-0 d-flex justify-content-start">
               <ActionButtons url={url} _id={_id} />
             </Col>
           </Row>
         </Card.Title>
-        <Card.Text>{description}</Card.Text>
+        <Card.Text style={{ marginLeft: "-12px" }}>{description}</Card.Text>
       </Card.Body>
     </Card>
   );

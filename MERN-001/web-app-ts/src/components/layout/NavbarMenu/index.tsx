@@ -14,10 +14,11 @@ export const NavbarMenu: FC<PropTypes> = (props: PropTypes) => {
   return (
     <Navbar
       expand="lg"
-      bg="primary"
+      bg="info"
       variant="dark"
       className="shadow"
       style={{ paddingLeft: "20px", paddingRight: "20px" }}
+      fixed="top"
     >
       <Navbar.Brand className="font-weight-bolder text-white">
         <img

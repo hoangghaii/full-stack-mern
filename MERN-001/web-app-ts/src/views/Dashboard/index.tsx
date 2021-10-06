@@ -59,9 +59,12 @@ export const Dashboard: FC<PropTypes & RouteComponentProps> = (
       const posts = postsList.post;
       body = (
         <>
-          <Row className="row-cols-1 row-cols-md-3 g-4 mx-auto mt-3">
+          <Row
+            className="row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mx-auto mt-8"
+            style={{ marginTop: "90px" }}
+          >
             {posts.map((post: PostType) => (
-              <Col key={post._id} className="my-2">
+              <Col key={post._id} className="my-3">
                 <SinglePost post={post} />
               </Col>
             ))}
